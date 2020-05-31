@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunfei.mapper.TSysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.yunfei.entity.TSysUser">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="age" property="age" />
+        <result column="email" property="email" />
+        <result column="state" property="state" />
+        <result column="creator" property="creator" />
+        <result column="creator_name" property="creatorName" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_by" property="modifyBy" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="modify_name" property="modifyName" />
+        <!-- 指定对应的集合对象关系映射
+            property：将数据放入user对象中的ordersList中
+            ofType：指定ordersList属性的泛型类型
+         -->
+        <collection property="userRolesList" ofType="com.yunfei.entity.TSysUserRoles"
+            select="com.yunfei.mapper.TSysUserRolesMapper.findByUserId" column="{userId=id}">
+            <id column="id" property="id" />
+            <result column="user_id" property="userId" />
+            <result column="role_id" property="roleId" />
+            <result column="creator" property="creator" />
+            <result column="creator_name" property="creatorName" />
+            <result column="create_time" property="createTime" />
+            <result column="modify_by" property="modifyBy" />
+            <result column="modify_time" property="modifyTime" />
+            <result column="modify_name" property="modifyName" />
+        </collection>
+    </resultMap>
+
+    <select id="findByLogin" resultMap="baseResultMap">
+        SELECT * FROM t_sys_user t WHERE t.user_name = #{userName} limit 1
+    </select>
+    <select id="findPassWordByLogin" resultType="String">
+        SELECT t.password FROM t_sys_user t WHERE t.user_name = #{userName} limit 1
+    </select>
+
+</mapper>

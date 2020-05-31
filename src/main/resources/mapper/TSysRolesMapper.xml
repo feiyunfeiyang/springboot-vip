@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunfei.mapper.TSysRolesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yunfei.entity.TSysRoles">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="pcode" property="pcode" />
+        <result column="find_code" property="findCode" />
+        <result column="type" property="type" />
+        <result column="remarks" property="remarks" />
+        <result column="dept_id" property="deptId" />
+        <result column="creator" property="creator" />
+        <result column="creator_name" property="creatorName" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_by" property="modifyBy" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="modify_name" property="modifyName" />
+    </resultMap>
+
+    <select id="findById" resultType="com.yunfei.entity.TSysRoles">
+        select * from t_sys_roles where id=#{roleId} limit 1
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/common/head :: commonHead('后台首页')"></head>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello Thymeleaf</title>
+    <style type="text/css">
+        .day{width:50px;height: 30px;display: inline-block;text-align: center;}
+    </style>
+</head>
+<body>
+<h1 th:text="${hello}">Hello World</h1>
+
+<div style="width:400px;height: 300px;">
+    <div class="day" th:each="week : ${weekList}" >
+        <span th:text="${week}"></span>
+    </div>
+    <div class="day" th:each="day,iterStat : ${dayList}" >
+        <span th:if="${day eq currentDay}">
+            <span style="color: red;" th:if="${day ne 0}" th:text="${day}"></span>
+        </span>
+        <span th:if="${day ne currentDay}">
+            <span th:if="${day ne 0}" th:text="${day}"></span>
+        </span>
+        <span th:if="${day ne 0 && day%6 eq 0}"> <br /> </span>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
